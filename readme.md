@@ -45,7 +45,7 @@ __Note: Store this password, you will need it later.__
 ```bash
 mkdir -m 755 data/web/status
 cp -r mailcow-status-app/web/* data/web/status
-mv data/web/status/.env.example data/web/status/.env
+mv data/web/status/env.example data/web/status/.env
 ```
 
 5. Copy `docker-compose.override.yml` to `/opt/mailcow-dockerized`. This will allow the cron jobs to run via ofelia.
