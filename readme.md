@@ -58,6 +58,8 @@ __Note: if you already have a `docker-compose.override.yml` file, manually merge
 
 6. Append `track.lua` to `data/conf/rspamd/lua/rspamd.local.lua` and copy `trackable.php` to `data/conf/rspamd/dynmaps`
 
+__UNTESTED, SKIP THIS STEP IN PRODUCTION SERVERS__
+
 ```bash
 cat mailcow-status-app/track.lua >> data/conf/rspamd/lua/rspamd.local.lua
 cp mailcow-status-app/trackable.php data/conf/rspamd/dynmaps
