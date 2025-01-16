@@ -1,0 +1,44 @@
+{
+    "name": "jwilsson/oauth2-client",
+    "description": "A modern OAuth2 Client Library.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Wilsson",
+            "email": "jonathan.wilsson@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "php-http/client-common": "^2.1",
+        "php-http/client-implementation": "^1.0",
+        "php-http/discovery": "^1.7",
+        "php-http/httplug": "^2.1",
+        "php-http/message": "^1.8"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "nyholm/psr7": "^1.3",
+        "pestphp/pest": "^1.21",
+        "php-coveralls/php-coveralls": "^2.0",
+        "php-http/mock-client": "^1.3",
+        "phpstan/phpstan": "^1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "OAuth2\\": "src/"
+        }
+    },
+    "scripts": {
+        "analyse": "phpstan analyse",
+        "lint": "php-cs-fixer fix -v --dry-run",
+        "lint:fix": "php-cs-fixer fix -v",
+        "test": "pest --coverage"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

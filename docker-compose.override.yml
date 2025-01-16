@@ -1,0 +1,39 @@
+services:
+
+  dmarc-parser:
+    image: rallisf1/dmarcts-report-parser:latest
+    depends_on:
+      - mysql-mailcow
+    environment:
+      - TZ=${TZ}
+      - DB_NAME=mailcowstatus
+      - DB_USER=status
+      - DB_PASS=YOUR_DB_PASSWORD
+      - IMAP_HOST=dovecot
+      - IMAP_USER=USER@YOURDOMAIN.COM
+      - IMAP_PASS=PASSWORD
+    restart: always
+    hostname: dmarc
+    dns:
+      - ${IPV4_NETWORK:-172.22.1}.254
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.download-dmarc.schedule: "@every 6h"
+      ofelia.job-exec.download-dmarc.command: "/dmarcts-report-parser.pl -i"
+    networks:
+      mailcow-network:
+        aliases:
+          - dmarc
+
+  rspamd-mailcow:
+    environment:
+      - TRACKER_URL=https://${MAILCOW_HOSTNAME}/status
+      - TRACKER_NOTICE=1
+
+  php-fpm-mailcow:
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.update-logs.schedule: "@every 5m"
+      ofelia.job-exec.update-logs.command: "curl -k --silent https://${MAILCOW_HOSTNAME}/status/cron/update.php?key=YOUR_CRON_KEY"
+      ofelia.job-exec.prune-logs.schedule: "@every 24h"
+      ofelia.job-exec.prune-logs.command: "curl -k --silent https://${MAILCOW_HOSTNAME}/status/cron/prune.php?key=YOUR_CRON_KEY"
