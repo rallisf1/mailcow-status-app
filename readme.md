@@ -44,14 +44,14 @@ __Note: Store this password, you will need it later.__
 
 ```bash
 mkdir -m 755 data/web/status
-cp -r mailcow-status/web/* data/web/status
+cp -r mailcow-status-app/web/* data/web/status
 mv data/web/status/.env.example data/web/status/.env
 ```
 
 5. Copy `docker-compose.override.yml` to `/opt/mailcow-dockerized`. This will allow the cron jobs to run via ofelia.
 
 ```bash
-cp mailcow-status/docker-compose.override.yml .
+cp mailcow-status-app/docker-compose.override.yml .
 ```
 
 __Note: if you already have a `docker-compose.override.yml` file, manually merge the files.__
@@ -59,8 +59,8 @@ __Note: if you already have a `docker-compose.override.yml` file, manually merge
 6. Append `track.lua` to `data/conf/rspamd/lua/rspamd.local.lua` and copy `trackable.php` to `data/conf/rspamd/dynmaps`
 
 ```bash
-cat mailcow-status/track.lua >> data/conf/rspamd/lua/rspamd.local.lua
-cp mailcow-status/trackable.php data/conf/rspamd/dynmaps
+cat mailcow-status-app/track.lua >> data/conf/rspamd/lua/rspamd.local.lua
+cp mailcow-status-app/trackable.php data/conf/rspamd/dynmaps
 ```
 
 __Note: updating mailcow might overwrite `rspamd.local.lua`. These files only affect open tracking.__
