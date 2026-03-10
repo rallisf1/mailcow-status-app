@@ -88,7 +88,8 @@ __Note: updating mailcow might overwrite `rspamd.local.lua`. These files only af
 10. Re-compose the docker containers
 
 ```bash
-docker compose up -d
+docker compose up --detach
+docker compose up --detach --force-recreate ofelia-mailcow
 ```
 
 11. (optional) Add an App link to mailcow:
